@@ -1,0 +1,109 @@
+@model LoginCommand
+
+@section head {
+    <title>Account Login | civitrak</title>
+    <link href="~/assets/css/reset.min.css" type="text/css" rel="stylesheet" />
+    <link href="~/assets/css/global.css" type="text/css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap" type="text/css" rel="stylesheet" />
+}
+
+<div id="container">
+    <div class="card">
+        <div class="text-center">
+            <a href=""
+               class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" viewBox="0 0 512 177" width="140" height="48">
+                <g fill="#228AE6"><path d="M226.46 60.14h-72.864L226.46 4.13h65.209zM285.536 54.236h72.865L293.42 4.13l-32.824 28.005z" />
+                <path d="M204.14-.25h15.102v25.824H204.14z" />
+                </g>
+                <path fill="#0E2A39" d="M63.368 151.164v22.531c-7.66 2.551-15.622 3.306-23.578 3.306-23.28 0-39.8-15.467-39.8-38.45 0-23.88 17.12-38.45 39.8-38.45 7.962 0 15.918.75 23.578 3.307v22.53c-6.607-3.454-14.867-4.353-22.228-4.353-4.954 0-10.965 1.053-14.42 4.954-3.152 3.152-4.205 7.66-4.205 11.863 0 2.403.303 4.657 1.053 6.607.6 2.105 1.653 3.907 3.152 5.406 3.306 4.055 9.46 5.108 14.42 5.108 6.606-.006 16.365-1.207 22.228-4.359zm13.362-50.318h22.53v75.098H76.73v-75.098zm11.268-7.059c-7.66 0-13.065-5.405-13.065-13.064 0-7.808 5.406-12.916 13.065-12.916 7.808 0 12.916 5.108 12.916 12.916 0 7.962-4.96 13.064-12.916 13.064zm102.88 7.059-30.79 75.098h-22.526l-30.79-75.098h22.376c3.306 8.563 6.607 16.971 9.913 25.534 3.152 8.563 6.457 16.971 9.763 25.534 3.306-8.563 6.607-16.971 9.913-25.534 3.152-8.563 6.458-16.971 9.764-25.534h22.377zm6.006 0h22.53v75.098h-22.53v-75.098zm11.263-7.059c-7.66 0-13.065-5.405-13.065-13.064 0-7.808 5.406-12.916 13.065-12.916 7.808 0 12.916 5.108 12.916 12.916.005 7.962-4.954 13.064-12.916 13.064zm69.389 9.615v20.878h-21.027v14.117c0 11.566 7.66 17.423 18.773 17.423 1.35 0 2.552-.149 3.604-.303 1.052-.148 1.95-.302 3.003-.451v20.878c-1.35.148-2.402.451-3.152.6-.903.149-2.402.149-4.353.149-22.68 0-40.4-15.467-40.4-38.3V82.827h22.53v20.574h21.022zm35.744 34.995v37.547h-22.53v-37.398c0-24.933 18.32-38.45 41.452-38.45.75 0 1.802 0 2.854.15s2.254.451 3.306.6v21.776c-.75-.149-1.653-.303-2.705-.452s-1.95-.302-2.705-.302c-3.753 0-6.761.451-9.312 1.2-4.205 1.505-7.962 4.354-9.312 8.861-.745 1.961-1.048 4.215-1.048 6.468zm87.562 0c-.6-10.965-5.56-17.423-16.971-17.423-3.152 0-5.858.452-8.111 1.35-6.91 3.152-9.461 9.01-9.461 16.222 0 2.403.303 4.656 1.052 6.607 2.254 7.808 9.01 10.662 16.52 10.662 11.416 0 16.97-6.155 16.97-17.418zm28.537 37.547h-22.53c-1.505-3.753-2.855-7.51-3.754-11.417-5.107 8.408-12.915 12.166-22.53 12.166-21.479 0-36.797-18.024-36.797-38.599 0-23.732 17.72-37.997 40.103-37.997 23.88 0 38.901 15.318 39.502 38.3.149 1.951.149 4.205.149 6.91 0 10.513 1.653 21.027 5.857 30.637zm52.567-75.098h22.53v7.51c0 11.417-3.906 22.377-12.315 30.19l19.826 37.398h-27.788l-23.28-44.456v44.456h-22.53V70.81h22.53v56.622h3.455c12.166 0 17.572-8.11 17.572-19.225v-7.361z" />
+            </svg>
+            </a>
+        </div>
+
+        <partial name="_ValidationSummary" />
+
+        <form asp-route="~/account/login"
+              onsubmit="return validate(event)"
+              autocomplete="off">
+            <input type="text"
+                   asp-for='UsernameOrEmail'
+                   name="usernameOrEmail"
+                   id="usernameOrEmail"
+                   placeholder="Username or Email Address"
+                   maxlength="255"
+                   onkeyup="toggleSubmit()"
+                   required />
+
+            <div class="input-group">
+                <input type="password"
+                   asp-for='Password'
+                   name="password"
+                   id="password"
+                   placeholder="Enter your password"
+                   maxlength="255"
+                   onkeyup="toggleSubmit()"
+                   required />
+                <span class="input-suffix" id="password-input-suffix" onclick="togglePassword()">
+                    <svg height="18" width="18" viewBox="0 -960 960 960"><path fill="#228ae6" d="m644-428-58-58q9-47-27-88t-93-32l-58-58q17-8 34.5-12t37.5-4q75 0 127.5 52.5T660-500q0 20-4 37.5T644-428Zm128 126-58-56q38-29 67.5-63.5T832-500q-50-101-143.5-160.5T480-720q-29 0-57 4t-55 12l-62-62q41-17 84-25.5t90-8.5q151 0 269 83.5T920-500q-23 59-60.5 109.5T772-302Zm20 246L624-222q-35 11-70.5 16.5T480-200q-151 0-269-83.5T40-500q21-53 53-98.5t73-81.5L56-792l56-56 736 736-56 56ZM222-624q-29 26-53 57t-41 67q50 101 143.5 160.5T480-280q20 0 39-2.5t39-5.5l-36-38q-11 3-21 4.5t-21 1.5q-75 0-127.5-52.5T300-500q0-11 1.5-21t4.5-21l-84-82Zm319 93Zm-151 75Z" /></svg>
+                    <svg height="18" width="18" viewBox="0 -960 960 960" class="hidden"><path fill="#228ae6" d="M480-320q75 0 127.5-52.5T660-500q0-75-52.5-127.5T480-680q-75 0-127.5 52.5T300-500q0 75 52.5 127.5T480-320Zm0-72q-45 0-76.5-31.5T372-500q0-45 31.5-76.5T480-608q45 0 76.5 31.5T588-500q0 45-31.5 76.5T480-392Zm0 192q-146 0-266-81.5T40-500q54-137 174-218.5T480-800q146 0 266 81.5T920-500q-54 137-174 218.5T480-200Zm0-300Zm0 220q113 0 207.5-59.5T832-500q-50-101-144.5-160.5T480-720q-113 0-207.5 59.5T128-500q50 101 144.5 160.5T480-280Z" /></svg>
+                </span>
+            </div>
+
+            <button id="submit"
+                    disabled>
+                <svg width="18" height="18" viewBox="0 -960 960 960">
+                    <path fill="currentColor"
+                          d="M225.087-67q-32.677 0-55.948-23.27-23.27-23.27-23.27-55.948v-423.825q0-32.911 23.27-56.347 23.271-23.437 55.948-23.437h58.695v-83.564q0-82.434 57.166-140.174 57.166-57.74 139.022-57.74t139.052 57.74q57.196 57.74 57.196 140.174v83.564h58.695q32.91 0 56.347 23.437 23.436 23.436 23.436 56.347v423.825q0 32.678-23.436 55.948Q767.823-67 734.913-67H225.087Zm0-79.218h509.826v-423.825H225.087v423.825ZM480.168-281.13q31.832 0 54.332-22.032Q557-325.193 557-356.13q0-30-22.668-54.5t-54.5-24.5q-31.832 0-54.332 24.5t-22.5 55q0 30.5 22.668 52.5t54.5 22ZM363.001-649.827h233.998v-83.434q0-49.964-33.792-84.112-33.793-34.148-82.956-34.148-49.164 0-83.207 34.148-34.043 34.148-34.043 84.112v83.434ZM225.087-146.218v-423.825 423.825Z" />
+                </svg>
+                Sign in
+            </button>
+        </form>
+
+        <p style="display:flex">
+            <a href="~/account/forgot-password">Forgot Password</a>
+            <span style="flex:1"></span>
+            <a href="~/account/signup">
+                Sign Up
+            </a>
+        </p>
+    </div>
+</div>
+
+@section scripts {
+    <script defer>
+        var submitting = false;
+        const toggleSubmit = () => {
+            if (document.getElementById('usernameOrEmail')?.value?.length >= 4 &&
+                document.getElementById('password')?.value?.length >= 4) {
+                // remove disabled attribute
+                document.getElementById('submit').removeAttribute('disabled');
+            } else {
+                // set disabled attribute
+                document.getElementById('submit').setAttribute('disabled', true);
+            }
+        };
+        const togglePassword = () => {
+            let passwordInput = document.getElementById("password");
+            let passwordInputSuffix = document.getElementById("password-input-suffix");
+            if (passwordInput && passwordInputSuffix) {
+
+                if (passwordInput.getAttribute('type') === 'password') passwordInput.setAttribute('type', 'text');
+                else passwordInput.setAttribute('type', 'password');
+
+                passwordInputSuffix.firstElementChild.classList.toggle('hidden');
+                passwordInputSuffix.lastElementChild.classList.toggle('hidden');
+            }
+        };
+        const validate = function (e) {
+            if (!submitting &&
+                (document.getElementById("usernameOrEmail")?.value?.length < 4 ||
+                    document.getElementById("password")?.value?.length < 4)) {
+                return false;
+            } else {
+                submitting = true;
+                document.getElementById('submit').setAttribute('disabled', true);
+            }
+        };
+    </script>
+}
